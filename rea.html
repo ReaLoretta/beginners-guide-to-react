@@ -1,0 +1,39 @@
+<body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@16.12.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16.12.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.8.3/babel.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+    <script type="text/babel">
+      const className = 'container'
+      const thingsReaLike = ['👑', '🍑', '👗', '💎', '🌹']
+      // const thingsReaLike = ['👑', '👗', '🌹']
+      // const thingsReaLike = ['👑', '🌹']
+      // const thingsReaLike = ['🌹']
+      // const thingsReaLike = []
+      const likesToString = (likes) => {
+        const beginning = likes.slice(0, -1)
+        const end = likes.slice(-1)
+        return beginning.join(', ') + (beginning.length ? ' & ' : '') + end
+      }
+      const Likes = ({name, likesList}) => 
+        <div>{name} likes {likesList || 'nothing :('}</div>
+      Likes.propTypes = {
+        name: PropTypes.string,
+        likesList: PropTypes.string,
+      }
+  
+      const element = (
+        <>
+          {Likes({name: 'Rea', likesList: likesToString(thingsReaLike)})}
+          {Likes({name: 'Ginkgo', likesList: likesToString(['🥬', '🥕'])})}
+          {Likes({name: 'Ato', LikesList: likesToString(['Rea'])})}
+          {Likes({name: 'Chandler', LikesList: likesToString([])})}
+          <Likes name="Stranger" likesList={likesToString(['Rea'])}></Likes>
+        </>
+        )
+      console.log(element)
+      ReactDOM.render(element, document.getElementById('root'))
+    </script>
+  </body>
+  
